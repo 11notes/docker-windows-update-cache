@@ -14,8 +14,6 @@
     sed -i "s/\$CACHE_MAX_AGE/${CACHE_MAX_AGE}/g" /etc/nginx/nginx.conf
     sed -i "s/\$CACHE_ACCESS_DENIED/${CACHE_ACCESS_DENIED}/g" /etc/nginx/nginx.conf
 
-    cat /etc/nginx/nginx.conf
-
     set -- "nginx" \
       -g \
       'daemon off;'
