@@ -11,7 +11,7 @@ events {
 
 stream {
   resolver 9.9.9.9 8.8.8.8 ipv6=off;
-  log_format stream escape=json '{"log":"proxy","time":"$time_iso8601", "server":{"name":"$upstream", "protocol":"$protocol"}, "client":{"ip":"$remote_addr"}, request:{"status":"$status"}, "cache":{"status":"MISS", "received":"$bytes_received", "sent":"$bytes_sent"}}';
+  log_format stream escape=json '{"log":"tcp:proxy","time":"$time_iso8601", "server":{"name":"$upstream", "protocol":"$protocol"}, "client":{"ip":"$remote_addr"}, request:{"status":$status}, "cache":{"status":"MISS"}, "io":{"received":"$upstream_bytes_received", "sent":"$bytes_sent"}}}';
   access_log /var/log/nginx/access.log stream;
 
   map $ssl_preread_server_name $upstream{
@@ -42,8 +42,8 @@ stream {
 
 http {
   resolver 9.9.9.9 8.8.8.8 ipv6=off;
-  log_format proxy escape=json '{"log":"proxy","time":"$time_iso8601","server":{"name":"$host", "protocol":"$server_protocol"}, "client":{"ip":"$remote_addr"},"request":{"method":"$request_method", "url":"$request_uri", "time":"$request_time", "status":$status} "cache":{"status":"MISS", "received":"$bytes_received", "sent":"$bytes_sent"}}';
-  log_format cache escape=json '{"log":"cache","time":"$time_iso8601","server":{"name":"$host", "protocol":"$server_protocol"}, "client":{"ip":"$remote_addr"},"request":{"method":"$request_method", "url":"$request_uri", "time":"$request_time", "status":$status}, "cache":{"status":"$upstream_cache_status", "received":"$upstream_bytes_received", "sent":"$bytes_sent"}}';
+  log_format proxy escape=json '{"log":"http:proxy","time":"$time_iso8601","server":{"name":"$host", "protocol":"$server_protocol"}, "client":{"ip":"$remote_addr"},"request":{"method":"$request_method", "url":"$request_uri", "time":"$request_time", "status":$status} "cache":{"status":"MISS"}, "io":{"received":"$upstream_bytes_received", "sent":"$bytes_sent"}}';
+  log_format cache escape=json '{"log":"cache","time":"$time_iso8601","server":{"name":"$host", "protocol":"$server_protocol"}, "client":{"ip":"$remote_addr"},"request":{"method":"$request_method", "url":"$request_uri", "time":"$request_time", "status":$status}, "cache":{"status":"$upstream_cache_status"}, "io":{"received":"$upstream_bytes_received", "sent":"$bytes_sent"}}';
   access_log off;
 
   include mime.types;
@@ -81,7 +81,6 @@ http {
   }
 
   server {
-    access_log /var/log/nginx/access.log proxy;
     listen 8443 ssl http2 default_server;
     server_name _;
 
