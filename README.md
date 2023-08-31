@@ -4,6 +4,31 @@ Run a Microsoft Update Cache server based on Alpine Linux. Small, lightweight, s
 ## Efficiency
 All logs are in JSON format. You can send them to a Redis server via docker Redis log plugin and parse bytes sent and received as well as cache status to determine how much data was served from cache and how much was downloaded from WAN. CACHE_ACCESS_DENIED is used to block someone from using the proxy as a regular web proxy. Only FQDN in the nginx.conf are allowed to WAN, anything else will be redirect to CACHE_ACCESS_DENIED.
 
+## DNS (bind) example
+```
+  ...
+  zone "download.windowsupdate.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "tlu.dl.delivery.mp.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "officecdn.microsoft.com.edgesuite.net" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "officecdn.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "windowsupdate.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "windowsupdate.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "wustat.windows.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "ntservicepack.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "forefrontdl.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "update.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "update.microsoft.com.nsatc.net" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "go.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "dl.delivery.mp.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  zone "delivery.mp.microsoft.com" IN { type master; file "/bind/var/windows-update-cache.db";  allow-update { none; }; };
+  ...
+
+  
+  /bind/var/windows-update-cache.db
+  @   IN    A   IP_OF_YOUR_CACHE_SERVER
+  *   IN    A   IP_OF_YOUR_CACHE_SERVER
+```
+
 
 ## Volumes
 * **/nginx/www** - Directory of all cached data
