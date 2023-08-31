@@ -1,8 +1,8 @@
 #!/bin/ash
   if [ -z "$1" ]; then
-    if [ -z "${CACHE_SIZE}" ]; then CACHE_SIZE="256g"; fi 
-    if [ -z "${CACHE_MAX_AGE}" ]; then CACHE_MAX_AGE="14d"; fi
-    if [ -z "${CACHE_ACCESS_DENIED}" ]; then CACHE_MAX_AGE="127.0.0.1:8443"; fi
+    if [ -z "${CACHE_SIZE}" ]; then CACHE_SIZE=256g; fi 
+    if [ -z "${CACHE_MAX_AGE}" ]; then CACHE_MAX_AGE=14d; fi
+    if [ -z "${CACHE_ACCESS_DENIED}" ]; then CACHE_MAX_AGE=127.0.0.1:8443; fi
 
     openssl req -x509 -newkey rsa:4096 -subj "/C=XX/ST=XX/L=XX/O=XX/OU=XX/CN=XX" \
       -keyout "/nginx/ssl/key.pem" \
