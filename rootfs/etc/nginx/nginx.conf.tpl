@@ -90,6 +90,10 @@ http {
     location / {
       return 403;
     }
+
+    location /ping {
+      return 200;
+    }
   }
 
   server {
