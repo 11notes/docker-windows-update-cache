@@ -1,6 +1,6 @@
 services:
   windows-update-cache:
-    image: "11notes/windows-update-cache:1.1.0"
+    image: "11notes/windows-update-cache:latest"
     container_name: "windows-update-cache"
     ports:
       - "80:80"

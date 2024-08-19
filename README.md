@@ -1,7 +1,7 @@
 ![Banner](https://github.com/11notes/defaults/blob/main/static/img/banner.png?raw=true)
 
 # 🏔️ Alpine - Windows Update Cache
-![size](https://img.shields.io/docker/image-size/11notes/windows-update-cache/1.1.0?color=0eb305) ![version](https://img.shields.io/docker/v/11notes/windows-update-cache/1.1.0?color=eb7a09) ![pulls](https://img.shields.io/docker/pulls/11notes/windows-update-cache?color=2b75d6) ![stars](https://img.shields.io/docker/stars/11notes/windows-update-cache?color=e6a50e) [<img src="https://img.shields.io/badge/github-11notes-blue?logo=github">](https://github.com/11notes)
+![size](https://img.shields.io/docker/image-size/11notes/windows-update-cache/latest?color=0eb305) ![version](https://img.shields.io/docker/v/11notes/windows-update-cache/latest?color=eb7a09) ![pulls](https://img.shields.io/docker/pulls/11notes/windows-update-cache?color=2b75d6) ![stars](https://img.shields.io/docker/stars/11notes/windows-update-cache?color=e6a50e) [<img src="https://img.shields.io/badge/github-11notes-blue?logo=github">](https://github.com/11notes)
 
 **Cache Windows Update for all clients via Nginx**
 
@@ -15,7 +15,7 @@ What can I do with this? This image will run Nginx as a cache proxy for all Wind
 ```yaml
 services:
   windows-update-cache:
-    image: "11notes/windows-update-cache:1.1.0"
+    image: "11notes/windows-update-cache:latest"
     container_name: "windows-update-cache"
     ports:
       - "80:80"
