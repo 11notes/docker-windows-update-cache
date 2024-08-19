@@ -1,7 +1,7 @@
 ![Banner](https://github.com/11notes/defaults/blob/main/static/img/banner.png?raw=true)
 
 # 🏔️ Alpine - Windows Update Cache
-![size](https://img.shields.io/docker/image-size/11notes/windows-update-cache/1.1.0?color=0eb305) ![version](https://img.shields.io/docker/v/11notes/windows-update-cache/1.1.0?color=eb7a09) ![pulls](https://img.shields.io/docker/pulls/11notes/windows-update-cache?color=2b75d6) ![activity](https://img.shields.io/github/commit-activity/m/11notes/docker-windows-update-cache?color=c91cb8) ![commit-last](https://img.shields.io/github/last-commit/11notes/docker-windows-update-cache?color=c91cb8) ![stars](https://img.shields.io/docker/stars/11notes/windows-update-cache?color=e6a50e)
+![size](https://img.shields.io/docker/image-size/11notes/windows-update-cache/1.1.0?color=0eb305) ![version](https://img.shields.io/docker/v/11notes/windows-update-cache/1.1.0?color=eb7a09) ![pulls](https://img.shields.io/docker/pulls/11notes/windows-update-cache?color=2b75d6) ![stars](https://img.shields.io/docker/stars/11notes/windows-update-cache?color=e6a50e) [<img src="https://img.shields.io/badge/github-11notes-blue?logo=github">](https://github.com/11notes)
 
 **Cache Windows Update for all clients via Nginx**
 
@@ -11,21 +11,11 @@ What can I do with this? This image will run Nginx as a cache proxy for all Wind
 # VOLUMES
 * **/nginx/www** - Directory of all updates
 
-# RUN
-```shell
-docker run --name windows-update-cache \
-  -p 80:80/tcp \
-  -p 443:443/tcp \
-  -v .../www:/nginx/www \
-  -d 11notes/windows-update-cache:[tag]
-```
-
 # COMPOSE
 ```yaml
-version: "3.8"
 services:
-  traefik:
-    image: "11notes/windows-update-cache:1.0.0"
+  windows-update-cache:
+    image: "11notes/windows-update-cache:1.1.0"
     container_name: "windows-update-cache"
     ports:
       - "80:80"
@@ -63,11 +53,10 @@ volumes:
 * [alpine](https://alpinelinux.org)
 
 # TIPS
-* Only use rootless container runtime (podman, rootless docker)
-* Allow non-root ports < 1024 via `echo "net.ipv4.ip_unprivileged_port_start=53" > /etc/sysctl.d/ports.conf`
+* Allow non-root ports < 1024 via `echo "net.ipv4.ip_unprivileged_port_start={n}" > /etc/sysctl.d/ports.conf`
 * Use a reverse proxy like Traefik, Nginx to terminate TLS with a valid certificate
 * Use Let’s Encrypt certificates to protect your SSL endpoints
 
 # ElevenNotes<sup>™️</sup>
-This image is provided to you at your own risk. Always make backups before updating an image to a new version. Check the changelog for breaking changes.
+This image is provided to you at your own risk. Always make backups before updating an image to a new version. Check the changelog for breaking changes. You can find all my repositories on [github](https://github.com/11notes).
     
