@@ -15,11 +15,13 @@
 # :: Run
   USER root
 
-  # :: update image
+  # :: prepare image
     RUN set -ex; \
       apk add --no-cache \
         openssl; \
-      apk --no-cache upgrade;
+      apk --no-cache upgrade; \
+      rm -rf /etc/nginx/nginx.conf; \
+      rm -rf /nginx/etc/default.conf;
 
   # :: copy root filesystem changes and set correct permissions
     COPY ./rootfs /
